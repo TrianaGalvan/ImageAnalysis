@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = Practica1
 TEMPLATE = app
@@ -15,11 +15,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     mylabel.cpp \
-    dlgimage.cpp
+    dlgimage.cpp \
+    qcustomplot.cpp \
+    histdialog.cpp \
+    histogramadata.cpp
 
 HEADERS  += mainwindow.h \
     dlgimage.h \
-    mylabel.h
+    mylabel.h \
+    qcustomplot.h \
+    histdialog.h \
+    histogramadata.h
 
 FORMS    += mainwindow.ui \
-    dlgimage.ui
+    dlgimage.ui \
+    histdialog.ui

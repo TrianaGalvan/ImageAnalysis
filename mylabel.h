@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QStatusBar>
 #include <QPixmap>
+#include "histogramadata.h"
 
 class MyLabel : public QLabel
 {
@@ -14,6 +15,7 @@ public:
 
     void setStatusBar(QStatusBar *sb);
     void grayscale();
+    HistogramaData* calcularHistograma();
 
 protected:
     void mouseMoveEvent(QMouseEvent * ev);

@@ -22,6 +22,7 @@ private slots:
     void open();
     void save_as();
     void grayscale();
+    void histograma();
 
     MyLabel *activeImage();
 

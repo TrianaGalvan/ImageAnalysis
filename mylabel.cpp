@@ -2,6 +2,7 @@
 #include <QMouseEvent>
 #include <QImage>
 #include <QPixmap>
+#include "histogramadata.h"
 
 MyLabel::MyLabel(QWidget *parent) : QLabel(parent)
 {
@@ -59,6 +60,31 @@ void MyLabel::grayscale() {
     setPixmap(QPixmap::fromImage(img));
 }
 
+HistogramaData* MyLabel::calcularHistograma(){
+    int x,y;
+
+    int Width=pixmap()->width();
+    int Height=pixmap()->height();
+    QImage img(pixmap()->toImage());
+    HistogramaData *hdata = new HistogramaData();
+
+    for (y=0;y<Height;y++) {
+       for (x=0;x<Width;x++) {
+           QRgb pixel=img.pixel(x,y);
+
+           int r=qRed(pixel);
+           int g=qGreen(pixel);
+           int b=qBlue(pixel);
+
+           hdata->actualizarValor(HistogramaData::ROJO, r);
+           hdata->actualizarValor(HistogramaData::VERDE, g);
+           hdata->actualizarValor(HistogramaData::AZUL, b);
+
+       }
+    }
+
+    return hdata;
+}
 
 
 

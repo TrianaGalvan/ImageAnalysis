@@ -39,6 +39,7 @@
      <string>Edit</string>
     </property>
     <addaction name="actionGrayscale"/>
+    <addaction name="actionHistograma"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -92,6 +93,11 @@
   <action name="actionGrayscale">
    <property name="text">
     <string>Grayscale</string>
+   </property>
+  </action>
+  <action name="actionHistograma">
+   <property name="text">
+    <string>Histograma</string>
    </property>
   </action>
  </widget>

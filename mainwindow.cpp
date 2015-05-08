@@ -4,6 +4,8 @@
 #include "dlgimage.h"
 #include <QWidget>
 #include <QMdiSubWindow>
+#include "histdialog.h"
+#include "histogramadata.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpen,SIGNAL(triggered()),this,SLOT(open()));
     connect(ui->actionSave_As,SIGNAL(triggered()),this,SLOT(save_as()));
     connect(ui->actionGrayscale,SIGNAL(triggered()),this,SLOT(grayscale()));
+    connect(ui->actionHistograma, SIGNAL(triggered()), this, SLOT(histograma()));
 
     setCentralWidget(&mdiArea);
 
@@ -75,6 +78,21 @@ void MainWindow::grayscale() {
     if (image!=NULL) {
         image->grayscale();
     }
+}
+
+void MainWindow::histograma(){
+    MyLabel *image = activeImage();
+
+    if(image != NULL){
+        HistogramaData *hData = image->calcularHistograma();
+
+        HistDialog *h;
+        h=new HistDialog(this);
+        h->set_histogramaData(hData);
+
+        h->show();
+    }
+
 }
 
 
