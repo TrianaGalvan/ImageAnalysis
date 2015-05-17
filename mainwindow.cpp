@@ -122,10 +122,10 @@ void MainWindow::convolucion(){
 
 }
 
-void MainWindow::aplicarConvolucion(int **mask, int colOrigen, int rowOrigen){
+void MainWindow::aplicarConvolucion(int **mask, int colOrigen, int rowOrigen,int numCols,int numRows){
         MyLabel* image = activeImage();
 
         //aplicar mascara a la imagen
-        image->aplicarMascara(mask,rowOrigen,colOrigen);
+        image->aplicarMascara(mask,rowOrigen,colOrigen,numCols,numRows);
 
 }

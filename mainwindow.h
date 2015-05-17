@@ -28,7 +28,7 @@ private slots:
     void histograma();
     void escalarImagen(int xmin,int xmax);
     void convolucion();
-    void aplicarConvolucion(int** mask,int colOrigen, int rowOrigen);
+    void aplicarConvolucion(int** mask,int colOrigen, int rowOrigen,int numCols,int numRows);
 
 private:
     Ui::MainWindow *ui;

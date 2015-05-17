@@ -142,7 +142,23 @@ void MyLabel::escalamientoHistograma(int min, int max){
     setPixmap(QPixmap::fromImage(img));
 }
 
-void MyLabel::aplicarMascara(int **mask, int rowCentro, int colCentro){
+void MyLabel::aplicarMascara(int **mask, int rowCentro, int colCentro,int numCols,int numRows){
+    int x,y;
+    int m,n;
     //recorrer la imagen
+    int Width=pixmap()->width();
+    int Height=pixmap()->height();
+    QImage img(pixmap()->toImage());
 
+
+    for(y = 0; y< Height;y++){
+        for(x = 0; x < Width;x++){
+            //recorer la mascara
+            for(m = 0 ; m < numRows ; m++){
+                for(n = 0; n < numCols;n++){
+
+                }
+            }
+        }
+    }
 }

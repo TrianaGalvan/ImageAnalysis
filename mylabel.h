@@ -18,9 +18,7 @@ public:
     HistogramaData* calcularHistograma();
     HistogramaData* calcularHistogramaGris();
     void escalamientoHistograma(int,int);
-    void aplicarMascara(int** mask,int rowCentro,int colCentro);
-
-
+    void aplicarMascara(int** mask,int rowCentro,int colCentro,int numCols,int numRows);
 protected:
     void mouseMoveEvent(QMouseEvent * ev);
 

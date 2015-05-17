@@ -25,7 +25,7 @@ private slots:
     int** crearArregloBidimensional(int col,int rows);
 
 signals:
-    void signal_convolucion(int** array,int colOrigen,int rowOrigen);
+    void signal_convolucion(int** array,int colOrigen,int rowOrigen,int numCols,int numRows);
 
 private:
     Ui::convolution *ui;

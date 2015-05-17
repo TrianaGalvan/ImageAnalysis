@@ -81,7 +81,7 @@ void Convolution::on_btn_convolucion_clicked()
     //obtener el centro
     QString col = ui->combo_columna_centro->currentText();
     int ColInt = col.toInt()-1;
-    emit signal_convolucion(arrtable,ColInt,filaInt);
+    emit signal_convolucion(arrtable,ColInt,filaInt,cols,rows);
 }
 
 int ** Convolution::crearArregloBidimensional(int cols,int rows){
