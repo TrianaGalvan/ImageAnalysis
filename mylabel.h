@@ -16,6 +16,10 @@ public:
     void setStatusBar(QStatusBar *sb);
     void grayscale();
     HistogramaData* calcularHistograma();
+    HistogramaData* calcularHistogramaGris();
+    void escalamientoHistograma(int,int);
+    void aplicarMascara(int** mask,int rowCentro,int colCentro);
+
 
 protected:
     void mouseMoveEvent(QMouseEvent * ev);

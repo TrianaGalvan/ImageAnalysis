@@ -5,6 +5,8 @@
 #include <QMdiArea>
 #include <dlgimage.h>
 #include "mylabel.h"
+#include "histdialog.h"
+#include "convolution.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,18 +19,23 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    MyLabel *activeImage();
 
 private slots:
     void open();
     void save_as();
     void grayscale();
     void histograma();
-
-    MyLabel *activeImage();
+    void escalarImagen(int xmin,int xmax);
+    void convolucion();
+    void aplicarConvolucion(int** mask,int colOrigen, int rowOrigen);
 
 private:
     Ui::MainWindow *ui;
     QMdiArea mdiArea;
+    HistDialog* h;
+    Convolution *c;
+
 };
 
 #endif // MAINWINDOW_H

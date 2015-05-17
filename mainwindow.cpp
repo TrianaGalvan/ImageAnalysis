@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
+#include <QErrorMessage>
 #include "dlgimage.h"
 #include <QWidget>
 #include <QMdiSubWindow>
 #include "histdialog.h"
 #include "histogramadata.h"
+#include "convolution.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +18,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSave_As,SIGNAL(triggered()),this,SLOT(save_as()));
     connect(ui->actionGrayscale,SIGNAL(triggered()),this,SLOT(grayscale()));
     connect(ui->actionHistograma, SIGNAL(triggered()), this, SLOT(histograma()));
+    connect(ui->actionConvolucion, SIGNAL(triggered()), this, SLOT(convolucion()));
+    h = new HistDialog(this);
+    connect(h,&HistDialog::senal_clickEscalar,this,&MainWindow::escalarImagen);
+    c = new Convolution();
+    connect(c,&Convolution::signal_convolucion,this,&MainWindow::aplicarConvolucion);
 
     setCentralWidget(&mdiArea);
 
@@ -44,9 +51,7 @@ void MainWindow::open() {
     w->setStatusBar(ui->statusBar);
 
     mdiArea.addSubWindow(w);
-
     w->show();
-
 }
 
 void MainWindow::save_as() {
@@ -81,44 +86,46 @@ void MainWindow::grayscale() {
 }
 
 void MainWindow::histograma(){
+
     MyLabel *image = activeImage();
 
     if(image != NULL){
         HistogramaData *hData = image->calcularHistograma();
+        HistogramaData *hDataG = image->calcularHistogramaGris();
 
-        HistDialog *h;
-        h=new HistDialog(this);
         h->set_histogramaData(hData);
-
+        h->set_histogramaDataGris(hDataG);
+        h->set_checkboxes();
         h->show();
     }
+}
+
+void MainWindow::escalarImagen(int xmin,int xmax){
+    MyLabel* image = activeImage();
+
+    if(xmin > xmax){
+            QErrorMessage *error = new QErrorMessage(this);
+            error->showMessage("Valores no válidos","ERROR");
+    }else{
+        if(image != NULL){
+            image->escalamientoHistograma(xmin,xmax);
+            this->histograma();
+        }
+    }
+}
+
+void MainWindow::convolucion(){
+    MyLabel *image = activeImage();
+    c = new Convolution(this);
+
+        c->show();
 
 }
 
+void MainWindow::aplicarConvolucion(int **mask, int colOrigen, int rowOrigen){
+        MyLabel* image = activeImage();
 
+        //aplicar mascara a la imagen
+        image->aplicarMascara(mask,rowOrigen,colOrigen);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

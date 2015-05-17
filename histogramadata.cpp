@@ -5,10 +5,12 @@ HistogramaData::HistogramaData()
     rojo = new QVector<double>(256, 0);
     verde = new QVector<double>(256, 0);
     azul = new QVector<double>(256, 0);
+    gray = new QVector<double>(256, 0);
 
     rMax = 0;
     vMax = 0;
     aMax = 0;
+    gMax = 0;
 }
 
 void HistogramaData::set_rojo(QVector<double> *rojo){
@@ -17,6 +19,10 @@ void HistogramaData::set_rojo(QVector<double> *rojo){
 
 void HistogramaData::set_verde(QVector<double> *verde){
     this->verde = verde;
+}
+
+void HistogramaData::set_gray(QVector<double> *gray){
+    this->gray = gray;
 }
 
 void HistogramaData::set_azul(QVector<double> *azul){
@@ -29,6 +35,10 @@ QVector<double>* HistogramaData::get_rojo(){
 
 QVector<double>* HistogramaData::get_verde(){
     return this->verde;
+}
+
+QVector<double>* HistogramaData::get_gray(){
+    return this->gray;
 }
 
 QVector<double>* HistogramaData::get_azul(){
@@ -63,6 +73,9 @@ void HistogramaData::actualizarValor(COLOR c, int indice){
         vectorSeleccionado = azul;
         maxSeleccionado = &aMax;
         break;
+    case GRAY:
+        vectorSeleccionado = gray;
+        maxSeleccionado = &gMax;
     default:
         break;
     }

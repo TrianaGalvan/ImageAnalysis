@@ -18,15 +18,18 @@ SOURCES += main.cpp\
     dlgimage.cpp \
     qcustomplot.cpp \
     histdialog.cpp \
-    histogramadata.cpp
+    histogramadata.cpp \
+    convolution.cpp
 
 HEADERS  += mainwindow.h \
     dlgimage.h \
     mylabel.h \
     qcustomplot.h \
     histdialog.h \
-    histogramadata.h
+    histogramadata.h \
+    convolution.h
 
 FORMS    += mainwindow.ui \
     dlgimage.ui \
-    histdialog.ui
+    histdialog.ui \
+    convolution.ui

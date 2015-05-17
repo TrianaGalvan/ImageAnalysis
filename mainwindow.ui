@@ -40,6 +40,7 @@
     </property>
     <addaction name="actionGrayscale"/>
     <addaction name="actionHistograma"/>
+    <addaction name="actionConvolucion"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -98,6 +99,11 @@
   <action name="actionHistograma">
    <property name="text">
     <string>Histograma</string>
+   </property>
+  </action>
+  <action name="actionConvolucion">
+   <property name="text">
+    <string>Convolucion</string>
    </property>
   </action>
  </widget>
