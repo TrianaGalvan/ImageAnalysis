@@ -154,11 +154,9 @@ void MyLabel::aplicarMascara(Mascara* mask){
     int Width=pixmap()->width();
     int Height=pixmap()->height();
     QImage img(pixmap()->toImage());
-    int valAcumulado = 0;
 
     for(y = 0; y< Height;y++){
         for(x = 0; x < Width;x++){
-            valAcumulado = 0;
             xini = mask->obtenerXInicial(x);
             xfin = mask->obtenerXFinal(x);
             yini = mask->obtenerYInicial(y);
@@ -175,24 +173,48 @@ void MyLabel::aplicarMascara(Mascara* mask){
                         continue;
                     }
 
-                    QRgb pixel=img.pixel(x,y);
+                    QRgb pixel=img.pixel(xc,yc);
 
                     int r=qRed(pixel);
                     int g=qGreen(pixel);
                     int b=qBlue(pixel);
 
                     //obtener el valor de la matriz
-                    int valorMask = mask->getValorMascara(x-xc,y-yc);
+                    int valorMask = mask->getValorMascara(xc-x,yc-y);
 
-                    valorAcumuladoR = valorMask*r;
-                    valorAcumuladoV = valorMask*g;
-                    valorAcumuadoA = valorMask*b;
+                    valorAcumuladoR += valorMask*r;
+                    valorAcumuladoV += valorMask*g;
+                    valorAcumuadoA += valorMask*b;
                 }
             }
-            img.setPixel(x,y,qRgb(valorAcumuladoR,valorAcumuladoV,valorAcumuadoA));
+
+            int pa = min(max(valorAcumuadoA,0),255);
+            int pr = min(max(valorAcumuladoR,0),255);
+            int pv = min(max(valorAcumuladoV,0),255);
+
+            img.setPixel(x,y,qRgb(pr,pv,pa));
             valorAcumuadoA = 0;
             valorAcumuladoR = 0;
             valorAcumuladoV = 0;
         }
+    }
+    setPixmap(QPixmap::fromImage(img));
+}
+
+int MyLabel::min(int a, int b){
+    if(a > b){
+        return b;
+    }
+    else{
+        return a;
+    }
+}
+
+int MyLabel::max(int a, int b){
+    if(a > b){
+        return a;
+    }
+    else{
+        return b;
     }
 }

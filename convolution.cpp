@@ -9,6 +9,7 @@ Convolution::Convolution(QWidget *parent) :
     ui(new Ui::convolution)
 {
     ui->setupUi(this);
+    connect(ui->btn_convolucion,SIGNAL(clicked()),this,SLOT(click_convolucion()));
 
 }
 
@@ -53,7 +54,7 @@ void Convolution::on_combo_alto_currentIndexChanged(int index)
 
 }
 
-void Convolution::on_btn_convolucion_clicked()
+void Convolution::click_convolucion()
 {
     QErrorMessage message;
     int rows = ui->tbl_convolucion->rowCount();
@@ -127,3 +128,5 @@ void Convolution::on_combo_fila_centro_activated(const QString &arg1)
 //    QString fila = ui->combo_fila_centro->currentText();
 //    int filaInt = fila.toInt()-1;
 }
+
+

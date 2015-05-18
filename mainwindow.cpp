@@ -116,7 +116,6 @@ void MainWindow::escalarImagen(int xmin,int xmax){
 
 void MainWindow::convolucion(){
     MyLabel *image = activeImage();
-    c = new Convolution(this);
 
         c->show();
 

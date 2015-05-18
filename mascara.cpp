@@ -20,7 +20,7 @@ void Mascara::setValorCelda(int xcor, int ycor, int valor){
 }
 
 int Mascara::obtenerXFinal(int coorX){
-    return coorX + (xcentro-(mascara.n_cols-1));
+    return coorX + ((mascara.n_cols-1)-xcentro);
 }
 
 int Mascara::obtenerXInicial(int coorX){
@@ -28,7 +28,7 @@ int Mascara::obtenerXInicial(int coorX){
 }
 
 int Mascara::obtenerYFinal(int coorY){
-    return coorY + (ycentro-(mascara.n_rows-1));
+    return coorY + ((mascara.n_rows-1)-ycentro);
 }
 
 int Mascara::obtenerYInicial(int coorY){

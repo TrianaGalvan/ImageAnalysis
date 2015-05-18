@@ -20,6 +20,8 @@ public:
     HistogramaData* calcularHistogramaGris();
     void escalamientoHistograma(int,int);
     void aplicarMascara(Mascara* mask);
+    int min(int a, int b);
+    int max(int a, int b);
 protected:
     void mouseMoveEvent(QMouseEvent * ev);
 
