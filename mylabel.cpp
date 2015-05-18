@@ -142,23 +142,57 @@ void MyLabel::escalamientoHistograma(int min, int max){
     setPixmap(QPixmap::fromImage(img));
 }
 
-void MyLabel::aplicarMascara(int **mask, int rowCentro, int colCentro,int numCols,int numRows){
+void MyLabel::aplicarMascara(Mascara* mask){
     int x,y;
     int m,n;
+    int xc = 0,yc = 0;
+    int xini = 0, xfin = 0;
+    int yini = 0, yfin = 0;
+    int valorAcumuladoR = 0, valorAcumuadoA = 0, valorAcumuladoV = 0;
+
     //recorrer la imagen
     int Width=pixmap()->width();
     int Height=pixmap()->height();
     QImage img(pixmap()->toImage());
-
+    int valAcumulado = 0;
 
     for(y = 0; y< Height;y++){
         for(x = 0; x < Width;x++){
-            //recorer la mascara
-            for(m = 0 ; m < numRows ; m++){
-                for(n = 0; n < numCols;n++){
+            valAcumulado = 0;
+            xini = mask->obtenerXInicial(x);
+            xfin = mask->obtenerXFinal(x);
+            yini = mask->obtenerYInicial(y);
+            yfin = mask->obtenerYFinal(y);
 
+            for(xc = xini ; xc <= xfin; xc++){
+                //verificar si esta dentro de los limites de la imagen
+                if(xc < 0 || xc > Width-1){
+                    continue;
+                }
+                for(yc = yini ; yc <= yfin; yc++){
+                    //verificar si esta dentro de los limites de la imagen
+                    if(yc < 0 || yc > Height-1){
+                        continue;
+                    }
+
+                    QRgb pixel=img.pixel(x,y);
+
+                    int r=qRed(pixel);
+                    int g=qGreen(pixel);
+                    int b=qBlue(pixel);
+
+                    //obtener el valor de la matriz
+                    int valorMask = mask->getValorMascara(x-xc,y-yc);
+
+                    valorAcumuladoR = valorMask*r;
+                    valorAcumuladoV = valorMask*g;
+                    valorAcumuadoA = valorMask*b;
                 }
             }
+            img.setPixel(x,y,qRgb(valorAcumuladoR,valorAcumuladoV,valorAcumuadoA));
+            valorAcumuadoA = 0;
+            valorAcumuladoR = 0;
+            valorAcumuladoV = 0;
         }
     }
 }

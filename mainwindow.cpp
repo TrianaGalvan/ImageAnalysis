@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionConvolucion, SIGNAL(triggered()), this, SLOT(convolucion()));
     h = new HistDialog(this);
     connect(h,&HistDialog::senal_clickEscalar,this,&MainWindow::escalarImagen);
-    c = new Convolution();
+    c = new Convolution(this);
     connect(c,&Convolution::signal_convolucion,this,&MainWindow::aplicarConvolucion);
 
     setCentralWidget(&mdiArea);
@@ -122,10 +122,10 @@ void MainWindow::convolucion(){
 
 }
 
-void MainWindow::aplicarConvolucion(int **mask, int colOrigen, int rowOrigen,int numCols,int numRows){
+void MainWindow::aplicarConvolucion(Mascara* mask){
         MyLabel* image = activeImage();
 
         //aplicar mascara a la imagen
-        image->aplicarMascara(mask,rowOrigen,colOrigen,numCols,numRows);
+        image->aplicarMascara(mask);
 
 }

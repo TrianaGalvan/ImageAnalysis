@@ -1,7 +1,8 @@
 #ifndef CONVOLUTION_H
 #define CONVOLUTION_H
-
+#include "armadillo"
 #include <QDialog>
+#include "mascara.h"
 
 namespace Ui {
 class convolution;
@@ -15,6 +16,8 @@ public:
     explicit Convolution(QWidget *parent = 0);
 
     ~Convolution();
+signals:
+    void signal_convolucion(Mascara* mask);
 
 private slots:
     void on_combo_ancho_currentIndexChanged(int index);
@@ -23,9 +26,6 @@ private slots:
     void on_combo_columna_centro_activated(const QString &arg1);
     void on_combo_fila_centro_activated(const QString &arg1);
     int** crearArregloBidimensional(int col,int rows);
-
-signals:
-    void signal_convolucion(int** array,int colOrigen,int rowOrigen,int numCols,int numRows);
 
 private:
     Ui::convolution *ui;

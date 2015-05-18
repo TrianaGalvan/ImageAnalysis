@@ -6,6 +6,12 @@
 
 QT       += core gui
 
+INCLUDEPATH += "../libs/armadillo-5.100.2/include/"
+
+DEFINES += ARMA_DONT_USE_WRAPPER
+
+LIBS += -llapack -lblas
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = Practica1
@@ -19,7 +25,8 @@ SOURCES += main.cpp\
     qcustomplot.cpp \
     histdialog.cpp \
     histogramadata.cpp \
-    convolution.cpp
+    convolution.cpp \
+    mascara.cpp
 
 HEADERS  += mainwindow.h \
     dlgimage.h \
@@ -27,7 +34,8 @@ HEADERS  += mainwindow.h \
     qcustomplot.h \
     histdialog.h \
     histogramadata.h \
-    convolution.h
+    convolution.h \
+    mascara.h
 
 FORMS    += mainwindow.ui \
     dlgimage.ui \

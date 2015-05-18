@@ -1,6 +1,8 @@
 #include "convolution.h"
 #include "ui_convolution.h"
 #include <QErrorMessage>
+#include "armadillo"
+#include "mascara.h"
 
 Convolution::Convolution(QWidget *parent) :
     QDialog(parent),
@@ -57,7 +59,8 @@ void Convolution::on_btn_convolucion_clicked()
     int rows = ui->tbl_convolucion->rowCount();
     int cols = ui->tbl_convolucion->columnCount();
 
-    int **arrtable = crearArregloBidimensional(rows,cols);
+    //crear la mascara
+    Mascara *mask  = new Mascara(rows,cols);
 
     //crear el arreglo de la tabla
     for(int r = 0; r < rows; r++){
@@ -66,13 +69,16 @@ void Convolution::on_btn_convolucion_clicked()
             if(data != NULL){
                 QString item = data->text();
                 int itemInt = item.toInt();
-                arrtable[r][c] = itemInt;
+                mask->setValorCelda(r,c,itemInt);
             }else{
                 message.showMessage("No hay valores");
                 break;
             }
         }
     }
+
+    mask->inversaMascara();
+
 
     //obtener el centro
     QString fila = ui->combo_fila_centro->currentText();
@@ -81,7 +87,10 @@ void Convolution::on_btn_convolucion_clicked()
     //obtener el centro
     QString col = ui->combo_columna_centro->currentText();
     int ColInt = col.toInt()-1;
-    emit signal_convolucion(arrtable,ColInt,filaInt,cols,rows);
+
+    mask->setCoordenadasCentro(ColInt,filaInt);
+
+    emit signal_convolucion(mask);
 }
 
 int ** Convolution::crearArregloBidimensional(int cols,int rows){

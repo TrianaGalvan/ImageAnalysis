@@ -5,6 +5,7 @@
 #include <QStatusBar>
 #include <QPixmap>
 #include "histogramadata.h"
+#include "mascara.h"
 
 class MyLabel : public QLabel
 {
@@ -18,7 +19,7 @@ public:
     HistogramaData* calcularHistograma();
     HistogramaData* calcularHistogramaGris();
     void escalamientoHistograma(int,int);
-    void aplicarMascara(int** mask,int rowCentro,int colCentro,int numCols,int numRows);
+    void aplicarMascara(Mascara* mask);
 protected:
     void mouseMoveEvent(QMouseEvent * ev);
 

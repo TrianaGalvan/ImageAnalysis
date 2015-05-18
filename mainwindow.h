@@ -7,6 +7,7 @@
 #include "mylabel.h"
 #include "histdialog.h"
 #include "convolution.h"
+#include "mascara.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,7 +29,7 @@ private slots:
     void histograma();
     void escalarImagen(int xmin,int xmax);
     void convolucion();
-    void aplicarConvolucion(int** mask,int colOrigen, int rowOrigen,int numCols,int numRows);
+    void aplicarConvolucion(Mascara* mask);
 
 private:
     Ui::MainWindow *ui;
