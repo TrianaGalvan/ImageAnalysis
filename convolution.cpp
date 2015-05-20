@@ -78,7 +78,7 @@ void Convolution::click_convolucion()
         }
     }
 
-    mask->inversaMascara();
+    //mask->inversaMascara();
 
 
     //obtener el centro

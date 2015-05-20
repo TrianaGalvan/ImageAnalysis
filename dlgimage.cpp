@@ -20,7 +20,7 @@ void dlgImage::setFileName(QString file) {
 
     pix.load(file);
     ui->label->setPixmap(pix);
-
+    ui->label->setScaledContents(true);
     fileName=file;
 }
 

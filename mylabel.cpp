@@ -154,6 +154,8 @@ void MyLabel::aplicarMascara(Mascara* mask){
     int Width=pixmap()->width();
     int Height=pixmap()->height();
     QImage img(pixmap()->toImage());
+    QImage copia = pixmap()->toImage();
+
 
     for(y = 0; y< Height;y++){
         for(x = 0; x < Width;x++){
@@ -173,7 +175,7 @@ void MyLabel::aplicarMascara(Mascara* mask){
                         continue;
                     }
 
-                    QRgb pixel=img.pixel(xc,yc);
+                    QRgb pixel=copia.pixel(xc,yc);
 
                     int r=qRed(pixel);
                     int g=qGreen(pixel);
